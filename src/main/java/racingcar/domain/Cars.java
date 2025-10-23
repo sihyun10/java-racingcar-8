@@ -25,10 +25,13 @@ public class Cars {
                 .orElse(0);
     }
 
-    public List<Car> findWinners() {
+    public Winners findWinners() {
         int maxDistance = findMaxDistance();
-        return cars.stream()
+
+        List<Car> winnerCars = cars.stream()
                 .filter(car -> car.getDistance() == maxDistance)
                 .collect(Collectors.toList());
+
+        return new Winners(winnerCars);
     }
 }
