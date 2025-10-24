@@ -2,6 +2,7 @@ package racingcar.controller;
 
 import java.util.List;
 import racingcar.domain.Cars;
+import racingcar.domain.Winners;
 import racingcar.util.RacingCarParser;
 import racingcar.util.RandomNumberGenerator;
 import racingcar.validator.RacingCarValidator;
@@ -37,5 +38,8 @@ public class RacingCarGame {
             cars.moveAll(generator);
             outputView.printRoundResult(cars);
         }
+
+        Winners winners = cars.findWinners();
+        outputView.printWinners(winners);
     }
 }

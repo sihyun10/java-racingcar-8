@@ -19,13 +19,6 @@ public class Cars {
         cars.forEach(car -> car.move(generator.generate()));
     }
 
-    public int findMaxDistance() {
-        return cars.stream()
-                .mapToInt(Car::getDistance)
-                .max()
-                .orElse(0);
-    }
-
     public Winners findWinners() {
         int maxDistance = findMaxDistance();
 
@@ -34,6 +27,13 @@ public class Cars {
                 .collect(Collectors.toList());
 
         return new Winners(winnerCars);
+    }
+
+    private int findMaxDistance() {
+        return cars.stream()
+                .mapToInt(Car::getDistance)
+                .max()
+                .orElse(0);
     }
 
     public void forEachCar(Consumer<Car> action) {
