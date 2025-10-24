@@ -9,7 +9,7 @@ public enum ErrorMessage {
     DUPLICATE_NAMES("[ERROR] 자동차 이름이 중복되었습니다."),
 
     INVALID_NUMBER("[ERROR] 시도 횟수는 숫자여야 합니다."),
-    NON_POSITIVE_NUMBER("[ERROR] 시도 횟수는 1회 이상이어야 합니다."),
+    ZERO_NUMBER("[ERROR] 시도 횟수는 1회 이상이어야 합니다."),
     EXCEED_MAX_COUNT("[ERROR] 최대 20회까지만 시도할 수 있습니다.");
 
     private final String message;

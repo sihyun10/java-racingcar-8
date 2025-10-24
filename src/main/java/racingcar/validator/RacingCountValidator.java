@@ -5,13 +5,13 @@ import racingcar.exception.InvalidInputException;
 
 public class RacingCountValidator {
 
-    private static final int MIN_ATTEMPTS = 1;
+    private static final int ZERO = 0;
     private static final int MAX_ATTEMPTS = 20;
 
     public static void validate(String input) {
         validateNumber(input);
         int count = Integer.parseInt(input);
-        validatePositive(count);
+        validateZero(count);
         validateMaxCount(count);
     }
 
@@ -21,9 +21,9 @@ public class RacingCountValidator {
         }
     }
 
-    private static void validatePositive(int count) {
-        if (count < MIN_ATTEMPTS) {
-            throw new InvalidInputException(ErrorMessage.NON_POSITIVE_NUMBER.getMessage());
+    private static void validateZero(int count) {
+        if (count == ZERO) {
+            throw new InvalidInputException(ErrorMessage.ZERO_NUMBER.getMessage());
         }
     }
 
