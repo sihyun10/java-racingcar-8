@@ -1,5 +1,7 @@
 package racingcar.view;
 
+import racingcar.domain.Cars;
+
 public class OutputView {
 
     public void printCarNameRequestMessage() {
@@ -8,5 +10,17 @@ public class OutputView {
 
     public void printRacingCountRequestMessage() {
         System.out.println("시도할 횟수는 몇 회인가요?");
+    }
+
+    public void printPlayResultMessage() {
+        System.out.println();
+        System.out.println("실행 결과");
+    }
+
+    public void printRoundResult(Cars cars) {
+        cars.forEachCar(car ->
+                System.out.println(car.getName() + " : " + "-".repeat(car.getDistance()))
+        );
+        System.out.println();
     }
 }

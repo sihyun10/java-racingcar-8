@@ -1,6 +1,7 @@
 package racingcar.domain;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import racingcar.util.RandomNumberGenerator;
 
@@ -33,5 +34,9 @@ public class Cars {
                 .collect(Collectors.toList());
 
         return new Winners(winnerCars);
+    }
+
+    public void forEachCar(Consumer<Car> action) {
+        cars.forEach(action);
     }
 }
