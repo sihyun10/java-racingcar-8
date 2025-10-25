@@ -2,7 +2,6 @@ package racingcar.service;
 
 import java.util.List;
 import racingcar.domain.Cars;
-import racingcar.util.RacingCarParser;
 import racingcar.validator.InputValidator;
 import racingcar.validator.RacingCarValidator;
 import racingcar.validator.RacingCountValidator;
