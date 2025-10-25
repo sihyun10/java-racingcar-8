@@ -8,6 +8,9 @@ public class RacingCountValidator {
     private static final int ZERO = 0;
     private static final int MAX_ATTEMPTS = 20;
 
+    private RacingCountValidator() {
+    }
+
     public static void validate(String input) {
         validateNumber(input);
         int count = Integer.parseInt(input);
