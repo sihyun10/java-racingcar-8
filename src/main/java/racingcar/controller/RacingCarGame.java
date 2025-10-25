@@ -21,7 +21,7 @@ public class RacingCarGame {
         Cars cars = initializer.createCars();
         int tryCount = initializer.createTryCount();
 
-        Winners winners = raceService.startRace(cars, tryCount);
+        Winners winners = raceService.play(cars, tryCount);
         outputView.printWinners(winners);
     }
 }

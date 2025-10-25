@@ -15,7 +15,7 @@ public class RaceService {
         this.outputView = outputView;
     }
 
-    public Winners startRace(Cars cars, int tryCount) {
+    public Winners play(Cars cars, int tryCount) {
         outputView.printPlayResultMessage();
 
         for (int i = 0; i < tryCount; i++) {
