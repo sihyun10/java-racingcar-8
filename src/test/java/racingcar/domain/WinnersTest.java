@@ -25,7 +25,7 @@ class WinnersTest {
     void 단독_우승자이름_반환() {
         Winners winners = new Winners(List.of(pobi));
 
-        assertWinnerNames(winners, List.of("pobi"), "pobi");
+        assertWinnerNames(winners, "pobi");
     }
 
     @Test
@@ -33,11 +33,10 @@ class WinnersTest {
     void 공동_우승자이름_반환() {
         Winners winners = new Winners(List.of(pobi, woni, jun));
 
-        assertWinnerNames(winners, List.of("pobi", "woni", "jun"), "pobi, woni, jun");
+        assertWinnerNames(winners, "pobi, woni, jun");
     }
 
-    private void assertWinnerNames(Winners winners, List<String> expectedNames, String expectedFormatted) {
-        assertThat(winners.getWinnerNames()).containsExactlyElementsOf(expectedNames);
-        assertThat(winners.formatNames()).contains(expectedFormatted);
+    private void assertWinnerNames(Winners winners, String expectedFormatted) {
+        assertThat(winners.formatNames()).isEqualTo(expectedFormatted);
     }
 }

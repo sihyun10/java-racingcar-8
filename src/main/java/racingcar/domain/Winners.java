@@ -11,13 +11,13 @@ public class Winners {
         this.winners = winners;
     }
 
-    public List<String> getWinnerNames() {
+    public String formatNames() {
+        return String.join(", ", getWinnerNames());
+    }
+
+    private List<String> getWinnerNames() {
         return winners.stream()
                 .map(Car::getName)
                 .collect(Collectors.toList());
-    }
-
-    public String formatNames() {
-        return String.join(", ", getWinnerNames());
     }
 }
