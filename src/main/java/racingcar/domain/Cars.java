@@ -3,7 +3,7 @@ package racingcar.domain;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import racingcar.util.RandomNumberGenerator;
+import racingcar.domain.strategy.MoveStrategy;
 import racingcar.view.OutputView;
 
 public class Cars {
@@ -16,16 +16,16 @@ public class Cars {
                 .collect(Collectors.toList());
     }
 
-    public Winners race(int tryCount, RandomNumberGenerator generator, OutputView outputView) {
+    public Winners race(int tryCount, MoveStrategy strategy, OutputView outputView) {
         for (int i = 0; i < tryCount; i++) {
-            moveAll(generator);
+            moveAll(strategy);
             outputView.printRoundResult(this);
         }
         return findWinners();
     }
 
-    private void moveAll(RandomNumberGenerator generator) {
-        cars.forEach(car -> car.move(generator.generate()));
+    private void moveAll(MoveStrategy strategy) {
+        cars.forEach(car -> car.move(strategy));
     }
 
     private Winners findWinners() {

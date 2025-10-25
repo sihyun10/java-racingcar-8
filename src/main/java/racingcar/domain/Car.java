@@ -1,19 +1,20 @@
 package racingcar.domain;
 
+import racingcar.domain.strategy.MoveStrategy;
+
 public class Car {
 
-    private static final int MOVE_CONDITION = 4;
-
+    private static final int MOVE_DISTANCE = 1;
     private final String name;
-    private int distance = 0;
+    private int distance;
 
     public Car(String name) {
         this.name = name;
     }
 
-    public void move(int randomNumber) {
-        if (randomNumber >= MOVE_CONDITION) {
-            distance++;
+    public void move(MoveStrategy strategy) {
+        if (strategy.movable()) {
+            distance += MOVE_DISTANCE;
         }
     }
 
