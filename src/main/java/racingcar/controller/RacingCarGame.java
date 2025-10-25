@@ -5,6 +5,7 @@ import racingcar.domain.Cars;
 import racingcar.domain.Winners;
 import racingcar.util.RacingCarParser;
 import racingcar.util.RandomNumberGenerator;
+import racingcar.validator.InputValidator;
 import racingcar.validator.RacingCarValidator;
 import racingcar.validator.RacingCountValidator;
 import racingcar.view.InputView;
@@ -18,10 +19,13 @@ public class RacingCarGame {
 
     public void start() {
         outputView.printCarNameRequestMessage();
-        List<String> names = RacingCarParser.parseNames(inputView.readCarNames());
-        RacingCarValidator.validate(names);
+        String carNames = inputView.readCarNames();
+        String refinedCarNames = InputValidator.validate(carNames);
+        
+        List<String> parsedCarNames = RacingCarParser.parseNames(refinedCarNames);
+        RacingCarValidator.validate(parsedCarNames);
 
-        Cars cars = new Cars(names);
+        Cars cars = new Cars(parsedCarNames);
 
         outputView.printRacingCountRequestMessage();
         String count = inputView.readRacingCount();

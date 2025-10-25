@@ -36,17 +36,6 @@ class RacingCarValidatorTest {
             RacingCarValidator.validate(names);
         }
 
-        @ParameterizedTest
-        @ValueSource(strings = {"123", "!!", "car🚘", "@"})
-        @DisplayName("허용되지 않은 문자가 포함된 경우 예외 발생")
-        void 허용되지_않은_문자_포함_예외_발생(String input) {
-            List<String> names = List.of(input, "pobi");
-
-            assertThatThrownBy(() -> RacingCarValidator.validate(names))
-                    .isInstanceOf(InvalidInputException.class)
-                    .hasMessage(ErrorMessage.INVALID_CHARACTER.getMessage());
-        }
-
         @Test
         @DisplayName("5자를 초과할 경우 예외 발생")
         void 이름_5자_초과_예외_발생() {

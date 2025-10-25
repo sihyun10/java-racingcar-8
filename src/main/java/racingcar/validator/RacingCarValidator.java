@@ -12,7 +12,8 @@ public class RacingCarValidator {
     private static final int MAX_CARS = 10;
     private static final int MAX_NAME_LENGTH = 5;
 
-    private static final String VALID_NAME_PATTERN = "^[가-힣a-zA-Z]+$";
+    private RacingCarValidator() {
+    }
 
     public static void validate(List<String> names) {
         validateNameRules(names);
@@ -23,19 +24,12 @@ public class RacingCarValidator {
     private static void validateNameRules(List<String> names) {
         for (String name : names) {
             validateNameLength(name);
-            validateCharacterSet(name);
         }
     }
 
     private static void validateNameLength(String name) {
         if (name.isEmpty() || name.length() > MAX_NAME_LENGTH) {
             throw new InvalidInputException(ErrorMessage.INVALID_NAME_LENGTH.getMessage());
-        }
-    }
-
-    private static void validateCharacterSet(String name) {
-        if (!name.matches(VALID_NAME_PATTERN)) {
-            throw new InvalidInputException(ErrorMessage.INVALID_CHARACTER.getMessage());
         }
     }
 
