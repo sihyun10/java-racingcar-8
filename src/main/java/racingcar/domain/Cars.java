@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import racingcar.util.RandomNumberGenerator;
+import racingcar.view.OutputView;
 
 public class Cars {
 
@@ -15,11 +16,19 @@ public class Cars {
                 .collect(Collectors.toList());
     }
 
-    public void moveAll(RandomNumberGenerator generator) {
+    public Winners race(int tryCount, RandomNumberGenerator generator, OutputView outputView) {
+        for (int i = 0; i < tryCount; i++) {
+            moveAll(generator);
+            outputView.printRoundResult(this);
+        }
+        return findWinners();
+    }
+
+    private void moveAll(RandomNumberGenerator generator) {
         cars.forEach(car -> car.move(generator.generate()));
     }
 
-    public Winners findWinners() {
+    private Winners findWinners() {
         int maxDistance = findMaxDistance();
 
         List<Car> winnerCars = cars.stream()

@@ -17,12 +17,6 @@ public class RaceService {
 
     public Winners play(Cars cars, int tryCount) {
         outputView.printPlayResultMessage();
-
-        for (int i = 0; i < tryCount; i++) {
-            cars.moveAll(generator);
-            outputView.printRoundResult(cars);
-        }
-
-        return cars.findWinners();
+        return cars.race(tryCount, generator, outputView);
     }
 }
