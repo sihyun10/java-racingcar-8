@@ -21,10 +21,12 @@ public class GameInitializer {
     public Cars createCars() {
         outputView.printCarNameRequestMessage();
         String carNames = inputView.readCarNames();
-        String refinedCarNames = InputValidator.validate(carNames);
+        InputValidator inputValidator = new InputValidator(carNames);
+        String refinedCarNames = inputValidator.validate();
 
         List<String> parsedNames = RacingCarParser.parseNames(refinedCarNames);
-        RacingCarValidator.validate(parsedNames);
+        RacingCarValidator racingCarValidator = new RacingCarValidator(parsedNames);
+        racingCarValidator.validate();
 
         return new Cars(parsedNames);
     }
@@ -32,8 +34,8 @@ public class GameInitializer {
     public int createTryCount() {
         outputView.printRacingCountRequestMessage();
         String count = inputView.readRacingCount();
-        RacingCountValidator.validate(count);
 
-        return Integer.parseInt(count);
+        RacingCountValidator racingCountValidator = new RacingCountValidator(count);
+        return racingCountValidator.validate();
     }
 }

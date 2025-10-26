@@ -12,39 +12,38 @@ public class RacingCarValidator {
     private static final int MAX_CARS = 10;
     private static final int MAX_NAME_LENGTH = 5;
 
-    private RacingCarValidator() {
+    private final List<String> carNames;
+
+    public RacingCarValidator(List<String> carNames) {
+        this.carNames = carNames;
     }
 
-    public static void validate(List<String> names) {
-        validateNameRules(names);
-        validateCarCount(names);
-        validateDuplicate(names);
+    public void validate() {
+        validateNameLength();
+        validateCarCount();
+        validateDuplicate();
     }
 
-    private static void validateNameRules(List<String> names) {
-        for (String name : names) {
-            validateNameLength(name);
+    private void validateNameLength() {
+        for (String name : carNames) {
+            if (name.isEmpty() || name.length() > MAX_NAME_LENGTH) {
+                throw new InvalidInputException(ErrorMessage.INVALID_NAME_LENGTH.getMessage());
+            }
         }
     }
 
-    private static void validateNameLength(String name) {
-        if (name.isEmpty() || name.length() > MAX_NAME_LENGTH) {
-            throw new InvalidInputException(ErrorMessage.INVALID_NAME_LENGTH.getMessage());
-        }
-    }
-
-    private static void validateCarCount(List<String> names) {
-        if (names.size() < MIN_CARS) {
+    private void validateCarCount() {
+        if (carNames.size() < MIN_CARS) {
             throw new InvalidInputException(ErrorMessage.TOO_FEW_CARS.getMessage());
         }
-        if (names.size() > MAX_CARS) {
+        if (carNames.size() > MAX_CARS) {
             throw new InvalidInputException(ErrorMessage.TOO_MANY_CARS.getMessage());
         }
     }
 
-    private static void validateDuplicate(List<String> names) {
-        Set<String> uniqueNames = new HashSet<>(names);
-        if (uniqueNames.size() != names.size()) {
+    private void validateDuplicate() {
+        Set<String> uniqueNames = new HashSet<>(carNames);
+        if (uniqueNames.size() != carNames.size()) {
             throw new InvalidInputException(ErrorMessage.DUPLICATE_NAMES.getMessage());
         }
     }

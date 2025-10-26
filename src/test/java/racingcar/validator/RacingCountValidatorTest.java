@@ -20,7 +20,8 @@ class RacingCountValidatorTest {
         @ValueSource(strings = {"1", "5", "20"})
         @DisplayName("1에서 20 사이 입력일 경우 통과")
         void 횟수_1에서_20_사이_입력_통과(String input) {
-            RacingCountValidator.validate(input);
+            RacingCountValidator racingCountValidator = new RacingCountValidator(input);
+            racingCountValidator.validate();
         }
     }
 
@@ -32,29 +33,26 @@ class RacingCountValidatorTest {
         @ValueSource(strings = {"테스트", "a", "3.5", "!", "##", "-1", " "})
         @DisplayName("숫자가 아닌 입력일 경우 예외 발생")
         void 숫자가_아닌_입력_예외_발생(String input) {
-            assertThatThrownBy(() -> RacingCountValidator.validate(input))
-                    .isInstanceOf(InvalidInputException.class)
-                    .hasMessage(ErrorMessage.INVALID_NUMBER.getMessage());
+            assertInvalidInput(input, ErrorMessage.INVALID_NUMBER);
         }
     }
 
     @Test
     @DisplayName("시도 횟수가 0일 경우 예외 발생")
     void 시도_횟수_0_예외_발생() {
-        String input = "0";
-
-        assertThatThrownBy(() -> RacingCountValidator.validate(input))
-                .isInstanceOf(InvalidInputException.class)
-                .hasMessage(ErrorMessage.ZERO_NUMBER.getMessage());
+        assertInvalidInput("0", ErrorMessage.ZERO_NUMBER);
     }
 
     @Test
     @DisplayName("시도 횟수 최대값 검증")
     void 최대_횟수_초과_예외_발생() {
-        String input = "21";
+        assertInvalidInput("21", ErrorMessage.EXCEED_MAX_COUNT);
+    }
 
-        assertThatThrownBy(() -> RacingCountValidator.validate(input))
+    private void assertInvalidInput(String input, ErrorMessage expectedMessage) {
+        RacingCountValidator racingCountValidator = new RacingCountValidator(input);
+        assertThatThrownBy(racingCountValidator::validate)
                 .isInstanceOf(InvalidInputException.class)
-                .hasMessage(ErrorMessage.EXCEED_MAX_COUNT.getMessage());
+                .hasMessage(expectedMessage.getMessage());
     }
 }
