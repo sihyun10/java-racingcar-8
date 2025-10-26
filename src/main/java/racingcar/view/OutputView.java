@@ -14,7 +14,7 @@ public class OutputView {
     }
 
     public void printPlayResultMessage() {
-        System.out.println();
+        printBlankLine();
         System.out.println("실행 결과");
     }
 
@@ -22,10 +22,14 @@ public class OutputView {
         cars.forEachCar(car ->
                 System.out.println(car.getName() + " : " + "-".repeat(car.getDistance()))
         );
-        System.out.println();
+        printBlankLine();
     }
 
     public void printWinners(Winners winners) {
         System.out.println("최종 우승자 : " + winners.formatNames());
+    }
+
+    private void printBlankLine() {
+        System.out.println();
     }
 }
