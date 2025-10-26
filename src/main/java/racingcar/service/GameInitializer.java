@@ -19,22 +19,43 @@ public class GameInitializer {
     }
 
     public Cars createCars() {
-        outputView.printCarNameRequestMessage();
-        String carNames = inputView.readCarNames();
-        InputValidator inputValidator = new InputValidator(carNames);
-        String refinedCarNames = inputValidator.validate();
-
-        List<String> parsedNames = RacingCarParser.parseNames(refinedCarNames);
-        RacingCarValidator racingCarValidator = new RacingCarValidator(parsedNames);
-        racingCarValidator.validate();
-
-        return new Cars(parsedNames);
+        String carNames = requestCarNames();
+        List<String> parsedCarNames = parseCarNames(carNames);
+        validateCarNames(parsedCarNames);
+        return new Cars(parsedCarNames);
     }
 
     public int createTryCount() {
-        outputView.printRacingCountRequestMessage();
-        String count = inputView.readRacingCount();
+        String count = requestTryCount();
+        return validateTryCount(count);
+    }
 
+    private String requestCarNames() {
+        outputView.printCarNameRequestMessage();
+        return inputView.readCarNames();
+    }
+
+    private String requestTryCount() {
+        outputView.printRacingCountRequestMessage();
+        return inputView.readRacingCount();
+    }
+
+    private List<String> parseCarNames(String carNames) {
+        String refinedCarNames = validateInput(carNames);
+        return RacingCarParser.parseNames(refinedCarNames);
+    }
+
+    private String validateInput(String carNames) {
+        InputValidator inputValidator = new InputValidator(carNames);
+        return inputValidator.validate();
+    }
+
+    private void validateCarNames(List<String> parsedNames) {
+        RacingCarValidator racingCarValidator = new RacingCarValidator(parsedNames);
+        racingCarValidator.validate();
+    }
+
+    private int validateTryCount(String count) {
         RacingCountValidator racingCountValidator = new RacingCountValidator(count);
         return racingCountValidator.validate();
     }
