@@ -5,6 +5,7 @@ import racingcar.exception.InvalidInputException;
 
 public class RacingCountValidator {
 
+    private static final String ONLY_DIGITS_REGEX = "\\d+";
     private static final int ZERO = 0;
     private static final int MAX_ATTEMPTS = 20;
 
@@ -19,7 +20,7 @@ public class RacingCountValidator {
     }
 
     private static void validateNumber(String input) {
-        if (!input.matches("\\d+")) {
+        if (!input.matches(ONLY_DIGITS_REGEX)) {
             throw new InvalidInputException(ErrorMessage.INVALID_NUMBER.getMessage());
         }
     }
