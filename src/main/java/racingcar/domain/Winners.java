@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class Winners {
 
+    private static final String NAME_DELIMITER = ", ";
     private final List<Car> winners;
 
     public Winners(List<Car> winners) {
@@ -12,7 +13,7 @@ public class Winners {
     }
 
     public String formatNames() {
-        return String.join(", ", getWinnerNames());
+        return String.join(NAME_DELIMITER, getWinnerNames());
     }
 
     private List<String> getWinnerNames() {
