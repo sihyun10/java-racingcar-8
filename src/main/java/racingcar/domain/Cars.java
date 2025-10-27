@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import racingcar.domain.strategy.MoveStrategy;
-import racingcar.view.OutputView;
 
 public class Cars {
 
@@ -16,26 +15,13 @@ public class Cars {
                 .collect(Collectors.toList());
     }
 
-    public Winners race(int tryCount, MoveStrategy strategy, OutputView outputView) {
-        for (int i = 0; i < tryCount; i++) {
-            moveAll(strategy);
-            outputView.printRoundResult(this);
-        }
-        return findWinners();
-    }
-
-    private void moveAll(MoveStrategy strategy) {
+    public void raceOnce(MoveStrategy strategy) {
         cars.forEach(car -> car.move(strategy));
     }
 
-    private Winners findWinners() {
+    public Winners findWinners() {
         int maxDistance = findMaxDistance();
-
-        List<Car> winnerCars = cars.stream()
-                .filter(car -> car.getDistance() == maxDistance)
-                .collect(Collectors.toList());
-
-        return new Winners(winnerCars);
+        return new Winners(findCarsAt(maxDistance));
     }
 
     private int findMaxDistance() {
@@ -43,6 +29,12 @@ public class Cars {
                 .mapToInt(Car::getDistance)
                 .max()
                 .orElse(0);
+    }
+
+    private List<Car> findCarsAt(int distance) {
+        return cars.stream()
+                .filter(car -> car.getDistance() == distance)
+                .collect(Collectors.toList());
     }
 
     public void forEachCar(Consumer<Car> action) {
