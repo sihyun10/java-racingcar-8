@@ -129,10 +129,10 @@
 **전체 흐름**
 
 사용자가 자동차 이름과 시도 횟수를 입력한다.  
-`RacingCarGame`은 이 입력을 받아 전체 경주를 진행한다.
+`RacingCarGame`이 입력을 받아 전체 경주를 진행한다.
 
 1. `GameInitializer`가 입력을 받아 `Cars`와 `tryCount`를 생성한다.
 2. `RaceService`가 `Cars`와 `MoveStrategy`를 이용해 경주를 반복 실행한다.
-3. 각 라운드마다 자동차들이 이동하고, 결과가 `OutputView`를 통해 출력된다.
-4. 모든 경주가 끝나면 `Cars`가 우승자를 계산한다.
+3. 각 라운드마다 `Cars.raceOne()`으로 자동차를 이동하고, 이동 결과를 `OutputView`로 출력한다.
+4. 모든 라운드가 끝나면 `Cars.findWinners()`가 최종 우승자를 계산한다.
 5. `RacingCarGame`이 `OutputView`를 통해 최종 우승자를 출력한다.
